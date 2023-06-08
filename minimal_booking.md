@@ -119,6 +119,54 @@ classDiagram
   SIMPLIFIED_AVAILABILITY ..> SIMPLIFIED_AVAILABILITY_HEADLINE : contains
   SIMPLIFIED_AVAILABILITY ..> MIMIMAL_LEDGER : contains
   
+  class SIMPLIFIED_ITEM {
+    bool is_card_required
+    bool is_grouped_calendar
+    bool is_free_allowed
+    sensitive_bool is_hidden
+    bool is_no_tax
+    int sortable_index
+    string description
+    string description_text
+    string description_bullets
+    string seo_description
+    string location
+    string booking_notes
+    string cancellation_notes
+    string no_transportation_notes
+    int no_transportation_minutes
+    string headline
+    string image_url
+    string image_cdn_url
+    IMAGE[] images
+    datetime created_at
+    datetime modified_at
+    bool is_gratuity_enabled
+    string receipt_footer
+    bool is_scanning_enabled
+    string scanning_instructions
+    MINIMAL_LEDGER ledger
+    string external_url
+    MINIMAL_FLOW_NODE effective_pre_checkout_flow_node
+    MINIMAL_FLOW_NODE effective_post_checkout_flow_node
+    auto settings
+    auto facts
+    string seating_notes
+    bool effective_is_online_seating_enabled
+    bool effective_is_advanced_online_seating_enabled
+    bool effective_is_seat_selection_required
+    bool effective_is_deposit_enabled
+    float deposit_percentage
+    bool effective_is_online_installments_enabled
+    bool effective_is_online_booking_online_installments_enabled
+    bool effective_is_direct_booking_online_installments_enabled
+  }
+  SIMPLIFIED_ITEM --|> ITEM_WITH_BOOKABILITY : extend
+  SIMPLIFIED_ITEM ..> IMAGE : contains
+  SIMPLIFIED_ITEM ..> MINIMAL_LEDGER : contains
+  SIMPLIFIED_ITEM ..> MINIMAL_FLOW_NODE : contains
+
+  
   class MINIMAL_BOOKING {
     string uuid
     MINIMAL_CONTACT contact
@@ -159,6 +207,7 @@ classDiagram
     MINIMAL_ITEM item
     datetime start_at
     datetime end_at
+    model() charter.Availability
   }
   MINIMAL_AVAILABILITY --|> MINIMAL : extend
   MINIMAL_AVAILABILITY ..> MINIMAL_COMPANY : contains
