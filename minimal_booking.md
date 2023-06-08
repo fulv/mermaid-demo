@@ -166,7 +166,7 @@ classDiagram
   SIMPLIFIED_ITEM ..> MINIMAL_LEDGER : contains
   SIMPLIFIED_ITEM ..> MINIMAL_FLOW_NODE : contains
 
-  ITEM_WITH_BOOKABILITY {
+  class ITEM_WITH_BOOKABILITY {
     bool is_private
     bool is_unlisted
     sensitive_int maximum_approximate_available_capacity
@@ -177,6 +177,28 @@ classDiagram
   ITEM_WITH_BOOKABILITY --|> BOOKING_RESTRICTION_MIXIN : extend
   ITEM_WITH_BOOKABILITY ..> MINIMAL_BOOKING_RESTRICTION : contains
   
+  class DEFAULT {
+    string unicode
+  }
+  DEFAULT --|> MINIMAL : extend
+  
+  class BOOKING_RESTRICTION_MIXIN {
+    bool is_bookable_ever_by_phone
+    string sold_out_text
+    string cutoff_unreached_kind
+    Decimal cutoff_unreached_hours
+    bool is_cutoff_unreached_call_to_book
+    string cutoff_reached_kind
+    Decimal cutoff_reached_hours
+    bool is_cutoff_reached_call_to_book
+    int minimum_initial_party_size
+    int minimum_subsequent_party_size
+    int maximum_initial_party_size
+    int maximum_subsequent_party_size
+    string auto_open_kind
+    Decimal auto_open_hours
+  }
+
   class MINIMAL_BOOKING {
     string uuid
     MINIMAL_CONTACT contact
@@ -200,11 +222,6 @@ classDiagram
   }
   MINIMAL_CONTACT --|> MINIMAL : extend
   MINIMAL_CONTACT ..> MINIMAL_COMPANY : contains
-  
-  class DEFAULT {
-    string unicode
-  }
-  DEFAULT --|> MINIMAL : extend
   
   class MINIMAL_ITEM {
     MINIMAL_COMPANY company
