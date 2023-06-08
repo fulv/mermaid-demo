@@ -1,6 +1,8 @@
 ```mermaid
 classDiagram
-direction BT
+  direction BT
 
-MINIMAL <|-- MINIMAL_BOOKING : extend
+  class MINIMAL_BOOKING
+
+  MINIMAL_BOOKING --|> MINIMAL : extend
 ```
