@@ -83,6 +83,42 @@ classDiagram
   }
   SIMPLIFIED_CONTACT --|> MINIMAL_CONTACT : extend
   
+  class SIMPLIFIED_AVAILABILITY {
+    SIMPLIFIED_ITEM item
+    MINIMAL_BOOKING_RESTRICTION booking_restriction
+    string tag
+    int capacity
+    int customer_count
+    bool has_customers
+    int approximate_available_capacity
+    string headline
+    string custom_headline
+    SIMPLIFIED_AVAILABILITY_HEADLINE availability_headline
+    sensitive_string headline_private
+    sensitive_string note
+    datetime created_at
+    datetime modified_at
+    datetime utc_start_at
+    datetime utc_end_at
+    MINIMAL_LEDGER ledger
+    string status
+    bool is_sold_out
+    bool is_unlisted
+    sensitive_string customer_breakdown
+    sensitive_string customer_breakdown_short
+    sensitive_string unbookable_reason
+    string book_url
+    string dashboard_url
+    sensitive_bool is_follow_up_disabled
+    sensitive_bool is_reminder_disabled
+    sensitive_bool is_sms_reminder_disabled
+  }
+  SIMPLIFIED_AVAILABILITY --|> MINIMAL_AVAILABILITY : extend
+  SIMPLIFIED_AVAILABILITY ..> SIMPLIFIED_ITEM : contains
+  SIMPLIFIED_AVAILABILITY ..> MINIMAL_BOOKING_RESTRICTION : contains
+  SIMPLIFIED_AVAILABILITY ..> SIMPLIFIED_AVAILABILITY_HEADLINE : contains
+  SIMPLIFIED_AVAILABILITY ..> MIMIMAL_LEDGER : contains
+  
   class MINIMAL_BOOKING {
     string uuid
     MINIMAL_CONTACT contact
