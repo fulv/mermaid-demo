@@ -199,6 +199,15 @@ classDiagram
     Decimal auto_open_hours
   }
 
+  class MINIMAL_BOOKING_RESTRICTION {
+    MINIMAL_COMPANY company
+    string name
+    model() charter.BookingRestriction
+  }
+  MINIMAL_BOOKING_RESTRICTION --|> DEFAULT : extend
+  MINIMAL_BOOKING_RESTRICTION --|> BOOKING_RESTRICTION_MIXIN : extend
+  MINIMAL_BOOKING_RESTRICTION ..> MINIMAL_COMPANY : contains
+  
   class MINIMAL_BOOKING {
     string uuid
     MINIMAL_CONTACT contact
