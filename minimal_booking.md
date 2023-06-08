@@ -166,6 +166,16 @@ classDiagram
   SIMPLIFIED_ITEM ..> MINIMAL_LEDGER : contains
   SIMPLIFIED_ITEM ..> MINIMAL_FLOW_NODE : contains
 
+  ITEM_WITH_BOOKABILITY {
+    bool is_private
+    bool is_unlisted
+    sensitive_int maximum_approximate_available_capacity
+    MINIMAL_BOOKING_RESTRICTION booking_restriction
+  }
+  ITEM_WITH_BOOKABILITY --|> MINIMAL_ITEM : extend
+  ITEM_WITH_BOOKABILITY --|> DEFAULT : extend
+  ITEM_WITH_BOOKABILITY --|> BOOKING_RESTRICTION_MIXIN : extend
+  ITEM_WITH_BOOKABILITY ..> MINIMAL_BOOKING_RESTRICTION : contains
   
   class MINIMAL_BOOKING {
     string uuid
@@ -190,6 +200,11 @@ classDiagram
   }
   MINIMAL_CONTACT --|> MINIMAL : extend
   MINIMAL_CONTACT ..> MINIMAL_COMPANY : contains
+  
+  class DEFAULT {
+    string unicode
+  }
+  DEFAULT --|> MINIMAL : extend
   
   class MINIMAL_ITEM {
     MINIMAL_COMPANY company
